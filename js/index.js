@@ -105,3 +105,4 @@ let createMonster = () => {
 }
 
 
+// Could not figure out the load next page feature
