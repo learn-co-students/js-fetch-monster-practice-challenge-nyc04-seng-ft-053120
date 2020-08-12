@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     createMonster();
 });
 
-// let page = 1
+let amount = 50
 
-fetch(`http://localhost:3000/monsters/?_limit=50&_page=1`) 
+fetch(`http://localhost:3000/monsters/?_limit=${amount}`) 
 .then(res => res.json())
 .then(monsterArr => monsterArr.forEach((monster) => {
     renderMonster(monster)
@@ -12,19 +12,24 @@ fetch(`http://localhost:3000/monsters/?_limit=50&_page=1`)
 
 
 
-// let forwardButton = document.querySelector('#forward')
-//     forwardButton.addEventListener('click', (evt) => {
-//          page += 1
-//         console.log(page)
-//         // location.reload()
-//     })
+
 
 
 let allMonsters = document.querySelector('#monster-container')
 let formContainer = document.querySelector('#create-monster')
 
+//Still have not solved load more button
+let forwardButton = document.querySelector('#forward')
+    forwardButton.addEventListener('click', (evt) => {
+         amount += 50
+        console.log(amount)
+        return allMonsters
+    })
+
+
 
 let renderMonster = (monsterObj) => {
+
     // create div container for each monster
     let newDiv = document.createElement('div')
 
@@ -44,8 +49,12 @@ let renderMonster = (monsterObj) => {
         newDiv.append(newH2, newH4, newPar)
 
     // appened to allMonster container
+        
        allMonsters.append(newDiv)
+       
     formContainer.innerHTML = ""
+
+    
        
     createMonster();
 }
